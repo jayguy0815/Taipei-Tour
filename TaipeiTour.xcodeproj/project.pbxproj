@@ -8,20 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		2D268576288F868400A6C4DE /* TaipeiTourApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D268575288F868400A6C4DE /* TaipeiTourApp.swift */; };
-		2D268578288F868400A6C4DE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D268577288F868400A6C4DE /* ContentView.swift */; };
 		2D26857A288F868600A6C4DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D268579288F868600A6C4DE /* Assets.xcassets */; };
 		2D26857D288F868600A6C4DE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D26857C288F868600A6C4DE /* Preview Assets.xcassets */; };
 		2D268589288F87C700A6C4DE /* TaipelTourListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D268588288F87C700A6C4DE /* TaipelTourListView.swift */; };
+		2D9BFC3D288F949D002B626B /* Places.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9BFC3C288F949D002B626B /* Places.swift */; };
+		2D9BFC3F288FB579002B626B /* PlaceDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9BFC3E288FB579002B626B /* PlaceDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2D268572288F868400A6C4DE /* TaipeiTour.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaipeiTour.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D268575288F868400A6C4DE /* TaipeiTourApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaipeiTourApp.swift; sourceTree = "<group>"; };
-		2D268577288F868400A6C4DE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2D268579288F868600A6C4DE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2D26857C288F868600A6C4DE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2D268585288F86FB00A6C4DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		2D268588288F87C700A6C4DE /* TaipelTourListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaipelTourListView.swift; sourceTree = "<group>"; };
+		2D9BFC3C288F949D002B626B /* Places.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Places.swift; sourceTree = "<group>"; };
+		2D9BFC3E288FB579002B626B /* PlaceDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,9 +56,10 @@
 		2D268574288F868400A6C4DE /* TaipeiTour */ = {
 			isa = PBXGroup;
 			children = (
-				2D268585288F86FB00A6C4DE /* Info.plist */,
 				2D268583288F86A600A6C4DE /* App */,
 				2D268584288F86B000A6C4DE /* Views */,
+				2D9BFC39288F9461002B626B /* Model */,
+				2D268585288F86FB00A6C4DE /* Info.plist */,
 				2D268579288F868600A6C4DE /* Assets.xcassets */,
 				2D26857B288F868600A6C4DE /* Preview Content */,
 			);
@@ -82,10 +85,18 @@
 		2D268584288F86B000A6C4DE /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				2D268577288F868400A6C4DE /* ContentView.swift */,
 				2D268588288F87C700A6C4DE /* TaipelTourListView.swift */,
+				2D9BFC3E288FB579002B626B /* PlaceDetailView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		2D9BFC39288F9461002B626B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2D9BFC3C288F949D002B626B /* Places.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -159,8 +170,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D268589288F87C700A6C4DE /* TaipelTourListView.swift in Sources */,
-				2D268578288F868400A6C4DE /* ContentView.swift in Sources */,
 				2D268576288F868400A6C4DE /* TaipeiTourApp.swift in Sources */,
+				2D9BFC3D288F949D002B626B /* Places.swift in Sources */,
+				2D9BFC3F288FB579002B626B /* PlaceDetailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

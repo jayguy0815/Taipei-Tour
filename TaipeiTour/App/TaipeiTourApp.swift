@@ -11,7 +11,7 @@ import SwiftUI
 struct TaipeiTourApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TaipeiTourListView()
         }
     }
 }

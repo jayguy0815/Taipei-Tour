@@ -7,56 +7,99 @@
 
 import SwiftUI
 
-struct TaipelTourListView: View {
+import SwiftUI
+
+
+
+struct TaipeiTourListView: View {
+    
     let dataBank = ["Coding", "Buy Milk", "Go to school"]
-    @State var places: Places?
+//    @State var places: Places?
+    @State var tourPlaces: [Place] = []
+    
     var body: some View {
-        List{
-            if let data = places?.data {
-                ForEach(data.indices, id: \.self) { index in
-                    ListCellView(data: data[index])
+        NavigationView {
+            List{
+                if let data = tourPlaces {
+                    ForEach(data.indices, id: \.self) { index in
+                        ZStack{
+                            NavigationLink {
+                                PlaceDetailView(place: data[index])
+                            } label: {
+                                
+                            }
+                            ListCellView(place: data[index])
+                        }
+                    }
                 }
             }
-//            ForEach(dataBank, id: \.self){ data in
-//                ListCellView(data: data)
-//            }
-        }.onAppear(perform: self.loadData)
+            .onAppear(perform: self.loadData)
+            .navigationTitle("Taipei Tour")
+        }
+        
+        
+        
     }
     
     func loadData(){
         let urlString = "https://www.travel.taipei/open-api/zh-tw/Attractions/All?page=1"
         
-        guard let url = URL(string: urlString) else {
+        guard let url = URL(string: urlString) else{
             print("illegle url")
             return
         }
         
         var request = URLRequest(url: url)
         request.setValue("application/json", forHTTPHeaderField: "Accept")
-        request.httpMethod = "Get"
+        request.httpMethod = "GET"
         
         URLSession.shared.dataTask(with: request) { data, response, error in
-            if let error = error{
-                print(error.localizedDescription)
+            if let error = error {
+                fatalError(error.localizedDescription)
             }
             
             guard let data = data else {
                 return
             }
-            
-            do {
+//            print(data)
+            do{
                 let places = try JSONDecoder().decode(Places.self, from: data)
                 DispatchQueue.main.async {
-                    self.places = places
-                    print(places.data)
+                    
+                    for p in places.data{
+                        if let image = p.images.first?.src{
+                            self.tourPlaces.append(
+                                Place(
+                                    name:p.name,
+                                    introduction:p.introduction,
+                                    address:p.address,
+                                    tel: p.tel,
+                                    image: image,
+                                    isFavor: false)
+                            )
+                        }else{
+                            self.tourPlaces.append(
+                                Place(
+                                    name:p.name,
+                                    introduction:p.introduction,
+                                    address:p.address,
+                                    tel: p.tel,
+                                    image: "",
+                                    isFavor: false)
+                            )
+                        }
+                    }
+                    
                 }
-            } catch let error{
-                fatalError(error.localizedDescription)
             }
+            catch let error{
+                print(error.localizedDescription)
+            }
+            
         }.resume()
-        
-    
     }
+    
+    
 }
 
 struct Places: Codable{
@@ -64,46 +107,48 @@ struct Places: Codable{
     struct Place: Codable{
         var name: String
         var introduction: String
+        var address: String
         var tel: String
+        var images: [image]
+        struct image: Codable{
+            var src: String
+        }
     }
 }
 
-struct TaipelTourListView_Previews: PreviewProvider {
+struct TaipeiTourListView_Previews: PreviewProvider {
     static var previews: some View {
-        TaipelTourListView()
+
+//        let example = [Place(name: "Test", introduction: "Test", tel: "Test", image: "", address: "", isFavor: false)]
+        TaipeiTourListView()
+
     }
 }
 
-struct ListCellView: View{
+struct ListCellView: View {
     
-    var data : Places.Place
-    init(data: Places.Place){
-        self.data = data
-    }
+    var place: Place
     
     var body: some View {
-        HStack{
-            Text("。")
-            VStack{
-                Text(data.name)
-                    .fontWeight(.bold)
-                    .font(.title)
-                    .foregroundColor(.black)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                
-                Text(data.introduction)
-                    .fontWeight(.medium)
-                    .font(.system(.body))
+        HStack(alignment: .top, spacing: 20) {
+            
+            let url = place.image
+            AsyncImage(url: URL(string: url)) { image in
+                image
+                    .resizable()
+                    .frame(width: 120, height: 120)
+                    .cornerRadius(20)
+            } placeholder: {
+                ProgressView()
+            }
+            VStack(alignment: .leading) {
+                Text(place.name)
+                    .font(.system(.title2))
+                Text(place.address)
                     .foregroundColor(.gray)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                
-                
-                Text(data.tel)
-                    .fontWeight(.light)
-                    .font(.system(.body))
+                Text(place.tel)
                     .foregroundColor(.gray)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-        
+                
             }
         }
     }
