@@ -54,6 +54,8 @@ struct TaipelTourListView: View {
                 fatalError(error.localizedDescription)
             }
         }.resume()
+        
+    
     }
 }
 
