@@ -24,6 +24,8 @@ struct PlaceDetailView: View {
             }
         }
     }
+    
+    
 }
 
 struct PlaceDetailView_Previews: PreviewProvider {
